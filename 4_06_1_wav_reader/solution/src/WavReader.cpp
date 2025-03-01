@@ -13,12 +13,24 @@ namespace wav {
 namespace {
 float convertSample(uint32_t sample, uint16_t bitsPerSample) {
   if (bitsPerSample == 8u) {
-    constexpr auto int8Max =
+    // sample [1, 255]
+    constexpr auto INT_8_MAX =
         static_cast<float>(std::numeric_limits<int8_t>::max());
-    return (static_cast<float>(sample) - (int8Max + 1.f)) / int8Max;
+    constexpr auto LPCM_VALUE_OF_0_SAMPLE = INT_8_MAX + 1.f;
+
+    // signedSample [-127, 127]
+    const auto signedSample =
+        static_cast<float>(sample) - LPCM_VALUE_OF_0_SAMPLE;
+
+    // [-1, 1]
+    return signedSample / INT_8_MAX;
   } else if (bitsPerSample == 16u) {
     // we assume little-endian byte order on the host machine
-    const auto reinterpretedSample = reinterpret_cast<int16_t*>(&sample);
+
+    // [-32 767, 32 767]
+    const auto* reinterpretedSample = reinterpret_cast<int16_t*>(&sample);
+
+    // [-1, 1]
     return static_cast<float>(*reinterpretedSample) /
            std::numeric_limits<int16_t>::max();
   }
@@ -75,7 +87,8 @@ void WavReader::read() {
   readField(dataHeader_.subchunk2Size);
 
   if (header_.blockAlign == 0u) {
-    throw std::runtime_error{"block align is 0: cannot calculate frame count (invalid file)"};
+    throw std::runtime_error{
+        "block align is 0: cannot calculate frame count (invalid file)"};
   }
 
   samplesCount_ = dataHeader_.subchunk2Size / header_.blockAlign;
