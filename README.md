@@ -1,10 +1,9 @@
 <div align="center">
 
 <img src="docs/WolfSoundLogo150px.webp"/>
+<img src="docs/DspProCourseLogo.webp" width="256px" />
 
 # DSP Pro Online Course Assignments with Solutions
-
-<img src="docs/DspProCourseLogo.webp" width="256px" />
 
 </div>
 
