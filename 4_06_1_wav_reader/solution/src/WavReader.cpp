@@ -74,6 +74,10 @@ void WavReader::read() {
   file.read(dataHeader_.subchunk2Id.data(), dataHeader_.subchunk2Id.size());
   readField(dataHeader_.subchunk2Size);
 
+  if (header_.blockAlign == 0u) {
+    throw std::runtime_error{"block align is 0: cannot calculate frame count (invalid file)"};
+  }
+
   samplesCount_ = dataHeader_.subchunk2Size / header_.blockAlign;
   samples_.reserve(samplesCount_);
 
