@@ -10,6 +10,22 @@
 
 Coding assignments (exercises) with solutions given to the members of the DSP Pro online course on learning digital audio signal processing for audio programming. For more information check https://www.wolfsoundacademy.com/dsp-pro
 
+## Usage
+
+To build and run the solutions locally, you need to first clone the repository.
+
+```bash
+# clone the repository if you haven't done so already (you only have to do it once)
+git clone https://github.com/JanWilczek/dsp-pro-course-assignments.git
+cd dsp-pro-course-assignments
+```
+
+To update the state of your local files with the latest version from GitHub, just run
+
+```bash
+git pull origin main:main
+```
+
 ## 🏦 Structure
 
 Each assignment has an example solution attached. The solutions are meant to be self-contained, i.e., you can treat them as separate projects unaware of the folder hierarchy.
