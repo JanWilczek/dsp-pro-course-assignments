@@ -1,9 +1,26 @@
-# 🎶 WAV Reader 🎼
+# 🎶 4.06. Assignment Solution: WAV Reader 🎼
+
+## Prerequisites to install
+
+- CMake
+- C++ compiler
+
+## Build instructions
 
 ```bash
 cmake -Bbuild -DCMAKE_EXPORT_COMPILE_COMMANDS=ON # optionally: -G "Ninja"
 cmake --build build
 ```
+
+## Usage
+
+To analyze and convert to binary a file (e.g., 1 kHz sine), run the following command using the generated executable:
+
+```bash
+build/read_wav data/1_channel_1_second_1kHzsine_16bitPCM@44100Hz.wav
+```
+
+You can compare this program's output to the output of the program you coded yourself.
 
 ## Note on types used
 
