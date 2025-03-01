@@ -179,7 +179,7 @@ void WavReader::printUsing(std::function<void(uint8_t)> printFunction) {
 
 void WavReader::printDataAsAscii() {
   printUsing([](uint8_t readByte) {
-    const auto character = static_cast<char>(readByte);
+    const auto character = static_cast<unsigned char>(readByte);
     // is the character printable?
     if (std::isprint(character)) {
       std::cout << character;
